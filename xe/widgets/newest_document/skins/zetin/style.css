@@ -1,0 +1,10 @@
+.newest-document-zetin { width: 100%; font-size: inherit; font-family: inherit; }
+.newest-document-zetin a { text-decoration: none; color: inherit; }
+.newest-document-zetin a:hover { text-decoration: underline; }
+.newest-document-zetin .document-item { display: block; width: 100%; padding: 6px; margin: 0; list-style: none; box-sizing: border-box; }
+.newest-document-zetin .document-item:nth-child(even) { background-color: #f2f2f2; }
+.newest-document-zetin .tag { background-color: #777; color: #fff; border-radius: 4px; padding: 1px 4px; cursor: default; }
+.newest-document-zetin .comment { color: #FB8C00; }
+
+.newest-document-zetin .document-title { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.newest-document-zetin .document-info { display: block; text-align: right; font-size: 12px; color: #555; }

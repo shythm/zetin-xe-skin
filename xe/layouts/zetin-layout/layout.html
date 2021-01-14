@@ -1,0 +1,181 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+
+<load target="layout.css" />
+<load target="layout.js" />
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@500;900&display=swap" rel="stylesheet">
+
+<!-- header -->
+<header class="zetin-header">
+    <!-- zetin logo -->
+    <a class="zetin-logo" href="./?mid=home">ZETIN</a>
+    <!-- global nagivation bar -->
+    <nav class="zetin-gnb">
+        <div class="nav-ctl">
+            <!-- <a href="" class="nav-itme search">검색</a> -->
+            <a href="javascript:void(0);" class="nav-item hamburger" onclick="trigHamburger(this)"><div></div></a>
+            <script>
+                function trigHamburger(e) {
+                    let $this = $(e);
+                    let $targ = $('.js-hamburger-targ');
+                    $this.toggleClass('js-trig');
+                    if ($this.hasClass('js-trig')) {
+                        $targ.stop().slideDown();
+                    } else {
+                        $targ.stop().slideUp(function () {
+                            $targ.removeAttr("style");
+                        });
+                    }
+                }
+            </script>
+            <!--@if($is_logged)-->
+                <a href="{getUrl('act', 'dispMemberInfo')}" rel="nofollow" title="{$logged_info->nick_name}" class="nav-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-person-fill" viewBox="0 0 16 16">
+                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                    </svg>
+                </a>
+                <a href="{getUrl('act', 'dispMemberLogout')}" rel="nofollow" title="로그아웃" class="nav-item login">로그아웃</a>
+            <!--@else-->
+                <a href="{getUrl('act', 'dispMemberLoginForm')}" id="btn-login" title="로그인" class="nav-item login">로그인</a>
+            <!--@end-->
+        </div>
+        <ul class="nav-main js-hamburger-targ">
+            <!-- if gnb isn't listed, check global_menu at the setting of this layout. -->
+            <li loop="$global_menu->list=>$key1,$val1" class="nav-item">
+                <a href="{$val1['href']}" class="{$val1['selected'] ? 'active' : ''}"><span>{$val1['link']}</span></a>
+                <ul cond="$val1['list']" class="nav-sub">
+                    <li loop="$val1['list']=>$key2,$val2" class="nav-item">
+                        <a href="{$val2['href']}" class="{$val2['selected'] ? 'active' : ''}"><span>{$val2['link']}</span></a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<!-- contents for xe -->
+<section class="xe-contents">
+    <!-- xe contents added by backend -->
+    {$content}
+</section>
+
+<!-- contents for home -->
+{@ $isHomePage = ($module_info->mid == 'home')}
+<section class="zetin-home" cond="$isHomePage">
+    <div class="main-img"></div>
+    <h2>ZETIN.about</h2>
+    <article class="about">
+        <div class="about-item">
+            <div class="polaroid">
+                <img src="./images/home/main_01.jpg" alt="" draggable="false" style="width: 100%; border-radius: 4px;">
+                <div class="caption" style="font-size: 14px;">#추억 #라인트레이서 #로봇 #대회</div>
+            </div>
+        </div>
+        <div class="about-item">
+            <p>안녕하세요, 서울시립대학교 중앙동아리 ZETIN입니다. 로봇 연구회 ZETIN(제틴)은 ZEro To INfinite의 약자로 0에서 무한대까지, 無에서 有를 창조한다는 의미의 이름을 가진 동아리입니다.</p>
+            <p>ZETIN은 <strong>마이크로 로봇을 연구하고 개발하는 활동을 주로 하는 동아리</strong>이며 1993년 학회 소모임으로 창설되어 2001년 9월 중앙동아리로 정식 등록되었습니다.</p>
+            <p>현재 각종 전국 로봇 경연 대회에 여러 팀이 참가하여 좋은 기록을 거두고 있으며 1998년부터 매년 라인트레이서 로봇 경연 대회를 개최함으로써 교내/외 학생들에게 로봇을 알리고, 국내 로봇 분야 발전에도 기여하고자 노력하고 있습니다.</p>
+            <p style="width: 100%; text-align: right;"><a href="http://zetin.uos.ac.kr/index.php?mid=history">연혁 바로가기</a></p>
+        </div>
+    </article>
+    <h2>ZETIN.notice</h2>
+    <article class="notice">
+        <img class="zbxe_widget_output" widget="newest_document" skin="zetin" order_target="list_order" order_type="desc" list_count="4" duration_new="24" module_srls="16263" />
+    </article>
+    <h2>ZETIN.board</h2>
+    <article class="widget">
+        <div class="widget-item">
+            <!-- widget: newest_document, skin: zetin -->
+            <h3>최근 게시글</h3>
+            <img class="zbxe_widget_output" widget="newest_document" skin="zetin" order_target="list_order" order_type="desc" list_count="8" duration_new="24" module_srls="16259,1741,31413,1742,16261" />
+        </div>
+        <div class="widget-item">
+            <h3>최근 댓글</h3>
+            <img class="zbxe_widget_output" widget="newest_comment" skin="zetin" list_count="8" module_srls="16263,16259,1741,31413,1742,16261" />
+        </div>
+    </article>
+    <h2>ZETIN.photo</h2>
+    <article class="gallery">
+        <img class="zbxe_widget_output" widget="content" skin="default" colorset="layout" content_type="document" module_srls="16261" list_type="gallery" tab_type="none" markup_type="list" list_count="4" cols_list_count="2" page_count="1" option_view="thumbnail" show_browser_title="N" show_comment_count="N" show_trackback_count="N" show_category="N" show_icon="N" order_target="regdate" order_type="desc" thumbnail_type="crop" thumbnail_width="400" thumbnail_height="300" />
+    </article>
+</section>
+
+<!-- footer -->
+<footer class="zetin-footer">
+    서울시립대학교 중앙동아리 ZETIN <br />
+    130-743 서울특별시 동대문구 서울시립대로 163 학생회관 3층 327호 <br />
+    Copyright 2021. ZETIN. All rights reserved.
+</footer>
+
+<!-- login section -->
+<section class="login-widget" style="display: none;"|cond="$XE_VALIDATOR_ID != 'layouts/zetin-layout/layout/1' || !$XE_VALIDATOR_MESSAGE">
+    <div class="login-background"></div>
+    <div class="login-box">
+        <div class="login-header">
+            <span>{$lang->cmd_login}</span>
+        </div>
+        <div class="login-body">
+            <form action="{getUrl('', 'act', 'procMemberLogin')}" method="post" autocomplete="off">
+                <input type="hidden" name="act" value="procMemberLogin" />
+                <input type="hidden" name="success_return_url" value="{getCurrentPageUrl()}" />
+                <input type="hidden" name="xe_validator_id" value="layouts/zetin-layout/layout/1" />
+                <fieldset>
+                    <div class="control-group">
+                        <label class="info-label" for="uemail">{$lang->user_id}</label>
+                        <div class="group">
+                            <input class="textbox" type="text" name="user_id" id="uemail" required="true" />
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                        </div>
+                        <label class="info-label" for="upw">{$lang->password}</label>
+                        <div class="group">
+                            <input class="textbox" type="password" name="password" id="upw" required="true" />
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                        </div>
+                    </div>
+                    <div cond="$XE_VALIDATOR_ID == 'layouts/zetin-layout/layout/1' && $XE_VALIDATOR_MESSAGE" class="control-group">
+                        <p class="error">{$XE_VALIDATOR_MESSAGE}</p>
+                    </div>
+                    <div class="control-group">
+                        <label class="chk_label" for="keepid_opt">
+                            <input type="checkbox" name="keep_signed" id="keepid_opt" value="Y" />
+                            <span class="checkbox"></span> {$lang->keep_signed}
+                        </label>
+                        <div id="keepid_warning" class="warning" style="display: none; font-size: 12px;">
+                            <p style="text-align:right;"><i class="xi-close"></i></p>
+                            <p>{str_replace('\n\n', '<br />', $lang->about_keep_signed)}</p>
+                            <div class="edge"></div>
+                        </div>
+                        <button type="submit" class="btn-submit">{$lang->cmd_login}</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+        <div class="login-footer">
+            <a href="{getUrl('act', 'dispMemberFindAccount')}" rel="nofollow">{$lang->cmd_find_member_account}</a>
+            <span class="f_bar">|</span>
+            <a href="{getUrl('act', 'dispMemberSignUpForm')}" rel="nofollow">{$lang->cmd_signup}</a>
+        </div>
+        <a href="#" id="btn-login-cancel" class="close"><span class="blind">닫기</span></a>
+    </div>
+    <script>
+        jQuery(function ($) {
+            let $loginWidget = $(".login-widget");
+            $("#btn-login").click(function () {
+                $loginWidget.show().addClass('show').removeClass('hide');
+                return false;
+            });
+            $("#btn-login-cancel").click(function () {
+                $loginWidget.addClass('hide').removeClass('show');
+                return false;
+            });
+            $("#keepid_opt").click(function(){
+                let chk = $(this).is(":checked");
+                chk ? $("#keepid_warning").show() : $("#keepid_warning").hide();
+            });
+        });
+    </script>
+</section>

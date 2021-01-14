@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<skin version="0.2">
+    <title xml:lang="ko">ZETIN용 최신 댓글 스킨</title>
+    <description xml:lang="ko">댓글을 출력합니다</description>
+    <version>1.0</version>
+    <date>2021-01-12</date>
+
+    <author email_address="tjdgh2626@icloud.com">
+        <name xml:lang="ko">이성호</name>
+    </author>
+</skin>
