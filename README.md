@@ -9,17 +9,9 @@
 
 ## 적용 모습
 
-### PC 화면
-
-![screen-pc](./img/screen-pc.png)
-
-### 태블릿 화면
-
-![screen-tablet](./img/screen-tablet.png)
-
-### 모바일 화면
-
-![screen-mobile](./img/screen-mobile.png)
+- [PC 화면 이미지](./img/screen-pc.png)
+- [태블릿 화면 이미지](./img/screen-tablet.png)
+- [모바일 화면 이미지](./img/screen-mobile.png)
 
 ## 적용 방법
 
