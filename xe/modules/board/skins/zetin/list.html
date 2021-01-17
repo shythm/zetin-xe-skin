@@ -1,0 +1,168 @@
+<include target="_header.html" />
+<include cond="$oDocument->isExists()" target="_read.html" />
+
+<!-- board list -->
+<table class="board-list">
+	<thead>
+		<!-- board list header -->
+		<tr>
+			<!-- default header -->
+			<th scope="col" class="col-idx">{$lang->no}</th>
+			<th scope="col" class="col-title">{$lang->title}</th>
+			<!-- selected header -->
+			<block loop="$list_config=>$key,$val">
+			<th scope="col" class="col-author" cond="$val->type=='nick_name'">{$lang->writer}</th>
+			<th scope="col" class="col-author" cond="$val->type=='user_id'">{$lang->user_id}</th>
+			<th scope="col" class="col-author" cond="$val->type=='user_name'">{$lang->user_name}</th>
+			<th scope="col" class="col-time" cond="$val->type=='regdate'"><a href="{getUrl('sort_index','regdate','order_type',$order_type)}">{$lang->date}</a></th>
+			<th scope="col" class="col-time" cond="$val->type=='last_update'"><a href="{getUrl('sort_index','last_update','order_type',$order_type)}">{$lang->last_update}</a></th>
+			<th scope="col" class="col-lastReply" cond="$val->type=='last_post'"><a href="{getUrl('sort_index','last_update','order_type',$order_type)}">{$lang->last_post}</a></th>
+			<th scope="col" class="col-readNum" cond="$val->type=='readed_count'"><a href="{getUrl('sort_index','readed_count','order_type',$order_type)}">{$lang->readed_count}</a></th>
+			<th scope="col" class="col-voteNum" cond="$val->type=='voted_count'"><a href="{getUrl('sort_index','voted_count','order_type',$order_type)}">{$lang->voted_count}</a></th>
+			</block>
+		</tr>
+	</thead>
+	<tbody>
+		<!-- notice items -->
+		<tr loop="$notice_list=>$no,$document">
+			<!-- default column -->
+			<td class="col-idx col-notice">
+				<block cond="$document_srl==$document->document_srl">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+						<path d="M9.828.722a.5.5 0 0 1 .354.146l4.95 4.95a.5.5 0 0 1 0 .707c-.48.48-1.072.588-1.503.588-.177 0-.335-.018-.46-.039l-3.134 3.134a5.927 5.927 0 0 1 .16 1.013c.046.702-.032 1.687-.72 2.375a.5.5 0 0 1-.707 0l-2.829-2.828-3.182 3.182c-.195.195-1.219.902-1.414.707-.195-.195.512-1.22.707-1.414l3.182-3.182-2.828-2.829a.5.5 0 0 1 0-.707c.688-.688 1.673-.767 2.375-.72a5.92 5.92 0 0 1 1.013.16l3.134-3.133a2.772 2.772 0 0 1-.04-.461c0-.43.108-1.022.589-1.503a.5.5 0 0 1 .353-.146z"/>
+					</svg>
+				</block>
+				<block cond="$document_srl!=$document->document_srl">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+						<path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+					</svg>
+				</block>
+			</td>
+			<td class="col-title">
+				<a href="{getUrl('document_srl',$document->document_srl, 'listStyle', $listStyle, 'cpage','')}">{$document->getTitle()}</a>
+				<a cond="$document->getCommentCount()" href="{getUrl('document_srl', $document->document_srl)}#comment" class="replyNum" title="Replies">[{$document->getCommentCount()}]</a>
+				<a cond="$document->getTrackbackCount()" href="{getUrl('document_srl', $document->document_srl)}#trackback" class="trackbackNum" title="Trackbacks">[{$document->getTrackbackCount()}]</a>
+			</td>
+			<!-- selected columns -->
+			<block loop="$list_config=>$key,$val">
+			<td class="col-author" cond="$val->type=='nick_name'">{$document->getNickName()}</td>
+			<td class="col-author" cond="$val->type=='user_id'">{$document->getUserID()}</td>
+			<td class="col-author" cond="$val->type=='user_name'">{$document->getUserName()}</td>
+			<td class="col-time" cond="$val->type=='regdate'">{$document->getRegdate('Y.m.d')}</td>
+			<td class="col-time" cond="$val->type=='last_update'">{zdate($document->get('last_update'),'Y.m.d')}</td>
+			<td class="col-lastReply" cond="$val->type=='last_post'">
+				<block cond="(int)($document->get('comment_count'))>0">
+				<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" class="pre-icon" viewBox="0 0 16 16">
+					<path d="M5.921 11.9L1.353 8.62a.719.719 0 0 1 0-1.238L5.921 4.1A.716.716 0 0 1 7 4.719V6c1.5 0 6 0 7 8-2.5-4.5-7-4-7-4v1.281c0 .56-.606.898-1.079.62z"/>
+				</svg>
+				<a href="{$document->getPermanentUrl()}#comment" title="Last Reply">{zdate($document->get('last_update'),'Y.m.d')}</a>
+				<span cond="$document->get('last_updater')"><sub>by</sub> {htmlspecialchars($document->get('last_updater'))}</span>
+				</block>
+				<block cond="(int)($document->get('comment_count'))==0">&nbsp;</block>
+			</td>
+			<td class="col-readNum" cond="$val->type=='readed_count'">
+				<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+					<path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+					<path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+				</svg>
+				{$document->get('readed_count')>0?$document->get('readed_count'):'0'}
+			</td>
+			<td class="col-voteNum" cond="$val->type=='voted_count'">
+				<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" class="pre-icon" viewBox="0 0 16 16">
+					<path d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.964.22.817.533 2.512.062 4.51a9.84 9.84 0 0 1 .443-.05c.713-.065 1.669-.072 2.516.21.518.173.994.68 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.162 3.162 0 0 1-.488.9c.054.153.076.313.076.465 0 .306-.089.626-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.826 4.826 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.616.849-.231 1.574-.786 2.132-1.41.56-.626.914-1.279 1.039-1.638.199-.575.356-1.54.428-2.59z"/>
+				</svg>
+				{$document->get('voted_count')!=0?$document->get('voted_count'):'0'}
+			</td>
+			</block>
+		</tr>
+		<!-- document items -->
+		<tr loop="$document_list=>$no,$document">
+			<!-- default column -->
+			<td class="col-idx">
+				<block cond="$document_srl==$document->document_srl">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+						<path d="M9.828.722a.5.5 0 0 1 .354.146l4.95 4.95a.5.5 0 0 1 0 .707c-.48.48-1.072.588-1.503.588-.177 0-.335-.018-.46-.039l-3.134 3.134a5.927 5.927 0 0 1 .16 1.013c.046.702-.032 1.687-.72 2.375a.5.5 0 0 1-.707 0l-2.829-2.828-3.182 3.182c-.195.195-1.219.902-1.414.707-.195-.195.512-1.22.707-1.414l3.182-3.182-2.828-2.829a.5.5 0 0 1 0-.707c.688-.688 1.673-.767 2.375-.72a5.92 5.92 0 0 1 1.013.16l3.134-3.133a2.772 2.772 0 0 1-.04-.461c0-.43.108-1.022.589-1.503a.5.5 0 0 1 .353-.146z"/>
+					</svg>
+				</block>
+				<block cond="$document_srl!=$document->document_srl">{$no}</block>
+			</td>
+			<td class="col-title">
+				<a href="{getUrl('document_srl',$document->document_srl, 'listStyle', $listStyle, 'cpage','')}">{$document->getTitle()}</a>
+				<a cond="$document->getCommentCount()" href="{getUrl('document_srl', $document->document_srl)}#comment" class="replyNum" title="Replies">[{$document->getCommentCount()}]</a>
+				<a cond="$document->getTrackbackCount()" href="{getUrl('document_srl', $document->document_srl)}#trackback" class="trackbackNum" title="Trackbacks">[{$document->getTrackbackCount()}]</a>
+			</td>
+			<!-- selected columns -->
+			<block loop="$list_config=>$key,$val">
+			<td class="col-author" cond="$val->type=='nick_name'">{$document->getNickName()}</td>
+			<td class="col-author" cond="$val->type=='user_id'">{$document->getUserID()}</td>
+			<td class="col-author" cond="$val->type=='user_name'">{$document->getUserName()}</td>
+			<td class="col-time" cond="$val->type=='regdate'">{$document->getRegdate('Y.m.d')}</td>
+			<td class="col-time" cond="$val->type=='last_update'">{zdate($document->get('last_update'),'Y.m.d')}</td>
+			<td class="col-lastReply" cond="$val->type=='last_post'">
+				<block cond="(int)($document->get('comment_count'))>0">
+				<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" class="pre-icon" viewBox="0 0 16 16">
+					<path d="M5.921 11.9L1.353 8.62a.719.719 0 0 1 0-1.238L5.921 4.1A.716.716 0 0 1 7 4.719V6c1.5 0 6 0 7 8-2.5-4.5-7-4-7-4v1.281c0 .56-.606.898-1.079.62z"/>
+				</svg>
+				<a href="{$document->getPermanentUrl()}#comment" title="Last Reply">{zdate($document->get('last_update'),'Y.m.d')}</a>
+				<span cond="$document->get('last_updater')"><sub>by</sub> {htmlspecialchars($document->get('last_updater'))}</span>
+				</block>
+				<block cond="(int)($document->get('comment_count'))==0">&nbsp;</block>
+			</td>
+			<td class="col-readNum" cond="$val->type=='readed_count'">
+				<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+					<path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+					<path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+				</svg>
+				{$document->get('readed_count')>0?$document->get('readed_count'):'0'}
+			</td>
+			<td class="col-voteNum" cond="$val->type=='voted_count'">
+				<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" class="pre-icon" viewBox="0 0 16 16">
+					<path d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.964.22.817.533 2.512.062 4.51a9.84 9.84 0 0 1 .443-.05c.713-.065 1.669-.072 2.516.21.518.173.994.68 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.162 3.162 0 0 1-.488.9c.054.153.076.313.076.465 0 .306-.089.626-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.826 4.826 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.616.849-.231 1.574-.786 2.132-1.41.56-.626.914-1.279 1.039-1.638.199-.575.356-1.54.428-2.59z"/>
+				</svg>
+				{$document->get('voted_count')!=0?$document->get('voted_count'):'0'}
+			</td>
+			</block>
+		</tr>
+	</tbody>
+</table>
+
+<!-- exception: no documents -->
+<p cond="!$document_list && !$notice_list" class="board-info no-ducument">{$lang->no_documents}</p>
+
+<!-- list footer -->
+<div class="board-list-footer">
+	<!-- pagination -->
+	<div class="pagination" cond="$document_list || $notice_list">
+		<a class="page-act page-first" href="{getUrl('page','','document_srl','','division',$division,'last_division',$last_division)}">
+			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+				<path d="M.5 3.5A.5.5 0 0 0 0 4v8a.5.5 0 0 0 1 0V8.753l6.267 3.636c.54.313 1.233-.066 1.233-.697v-2.94l6.267 3.636c.54.314 1.233-.065 1.233-.696V4.308c0-.63-.693-1.01-1.233-.696L8.5 7.248v-2.94c0-.63-.692-1.01-1.233-.696L1 7.248V4a.5.5 0 0 0-.5-.5z"/>
+			</svg>
+		</a> 
+		<div class="page-num">
+			<block loop="$page_no=$page_navigation->getNextPage()">
+			<a class="page-curr"|cond="$page==$page_no" href="{getUrl('page',$page_no,'document_srl','','division',$division,'last_division',$last_division)}">{$page_no}</a>
+			</block>
+		</div>
+		<a class="page-act page-last" href="{getUrl('page',$page_navigation->last_page,'document_srl','','division',$division,'last_division',$last_division)}">
+			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+				<path d="M15.5 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V8.753l-6.267 3.636c-.54.313-1.233-.066-1.233-.697v-2.94l-6.267 3.636C.693 12.703 0 12.324 0 11.693V4.308c0-.63.693-1.01 1.233-.696L7.5 7.248v-2.94c0-.63.693-1.01 1.233-.696L15 7.248V4a.5.5 0 0 1 .5-.5z"/>
+			</svg>
+		</a>
+	</div>
+
+	<div class="btnArea">
+		<a href="{getUrl('act','dispBoardWrite','document_srl','')}" class="btn">{$lang->cmd_write}</a>
+	</div>
+	<form cond="$grant->view" action="{getUrl()}" method="get" onsubmit="return procFilter(this, search)" id="board_search" class="board_search">
+		<input type="hidden" name="vid" value="{$vid}" />
+		<input type="hidden" name="mid" value="{$mid}" />
+		<input type="hidden" name="category" value="{$category}" />
+		<input type="text" name="search_keyword" value="{htmlspecialchars($search_keyword)}" accesskey="S" title="{$lang->cmd_search}" class="iText" />
+		<select name="search_target">
+			<option loop="$search_option=>$key,$val" value="{$key}" selected="selected"|cond="$search_target==$key">{$val}</option>
+		</select>
+		<input type="submit" onclick="xGetElementById('board_search').submit();return false;" value="{$lang->cmd_search}" class="btn" />
+	</form>
+</div>
+
+<include target="_footer.html" />

@@ -1,0 +1,30 @@
+<!-- COMMENT -->
+<div class="feedback" id="comment">
+	<div class="fbHeader">
+		<h2>{$lang->comment} <em>'{$oDocument->getCommentcount()}'</em></h2>
+	</div>
+	<ul cond="$oDocument->getCommentcount()" class="fbList">
+		<li loop="$oDocument->getComments()=>$key,$comment" class="fbItem" style="padding-left:{($comment->get('depth'))*15}px"|cond="$comment->get('depth')" id="comment_{$comment->comment_srl}">
+			<h3 class="author">
+				<a cond="$comment->homepage" href="{$comment->homepage}">{$comment->getNickName()}</a>
+				<strong cond="!$comment->homepage">{$comment->getNickName()}</strong>
+			</h3>
+			<p class="time">{$comment->getRegdate('Y.m.d H:i')}</p>
+			{$comment->getContent(false)}
+			<p class="action">
+				<a href="{getUrl('act','dispBoardReplyComment','comment_srl',$comment->comment_srl)}">{$lang->cmd_reply}</a>
+				<a cond="$comment->isGranted()||!$comment->get('member_srl')" href="{getUrl('act','dispBoardModifyComment','comment_srl',$comment->comment_srl)}">{$lang->cmd_modify}</a>
+				<a cond="$comment->isGranted()||!$comment->get('member_srl')" href="{getUrl('act','dispBoardDeleteComment','comment_srl',$comment->comment_srl)}">{$lang->cmd_delete}</a>
+			</p>
+		</li>
+	</ul>
+    <div cond="$oDocument->comment_page_navigation" class="pagination">
+        <a href="{getUrl('cpage',1)}#comment" class="prevEnd">{$lang->first_page}</a> 
+        <block loop="$page_no=$oDocument->comment_page_navigation->getNextPage()">
+			<strong cond="$cpage==$page_no">{$page_no}</strong> 
+			<a cond="$cpage!=$page_no" href="{getUrl('cpage',$page_no)}#comment">{$page_no}</a>
+        </block>
+        <a href="{getUrl('cpage',$oDocument->comment_page_navigation->last_page)}#comment" class="nextEnd">{$lang->last_page}</a>
+    </div>
+</div>
+<!-- /COMMENT -->

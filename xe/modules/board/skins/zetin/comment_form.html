@@ -1,0 +1,30 @@
+<include target="_header.html" />
+<div cond="$oSourceComment->isExists()" class="context_data">
+	<h3 class="author">
+		<a cond="$oSourceComment->homepage" href="{$oSourceComment->homepage}">{$oSourceComment->getNickName()}</a>
+		<strong cond="!$oSourceComment->homepage">{$oSourceComment->getNickName()}</strong>
+	</h3>
+	<p class="time">{$oSourceComment->getRegdate('Y.m.d H:i')}</p>
+	{$oSourceComment->getContent(false)}
+</div>
+<!-- WRITE COMMENT -->
+<form action="./" method="post" onsubmit="return procFilter(this, insert_comment)" class="write_comment">
+	<input type="hidden" name="mid" value="{$mid}" />
+	<input type="hidden" name="document_srl" value="{$oComment->get('document_srl')}" />
+	<input type="hidden" name="comment_srl" value="{$oComment->get('comment_srl')}" />
+	<input type="hidden" name="parent_srl" value="{$oComment->get('parent_srl')}" />
+	<textarea name="content" rows="5" cols="50">{htmlspecialchars($oComment->get('content'))}</textarea>
+	<div class="write_author" cond="!$is_logged">
+		<label for="userName">{$lang->writer}</label>
+		<input type="text" name="nick_name" id="userName" class="iText userName" value="{htmlspecialchars($oComment->get('nick_name'))}" />
+		<label for="userPw">{$lang->password}</label>
+		<input type="password" name="password" id="userPw" class="iText userPw" />
+		<label for="homePage">{$lang->homepage}</label>
+		<input type="text" name="homepage" id="homePage" class="iText homePage" value="{htmlspecialchars($oComment->get('homepage'))}" />
+    </div>
+	<div class="btnArea">
+		<input type="submit" value="{$lang->cmd_comment_registration}" class="btn" />
+	</div>
+</form>
+<!-- /WRITE COMMENT -->
+<include target="_footer.html" />

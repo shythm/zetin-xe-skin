@@ -1,0 +1,8 @@
+<load target="style.css" />
+<div class="zetin-board">
+	<a style="display: none;" cond="$grant->manager" class="setup" href="{getUrl('act','dispBoardAdminBoardInfo')}" rel="nofollow" title="{$lang->cmd_setup}">{$lang->cmd_setup}</a>
+	<div class="board-header">
+		<div cond="$module_info->browser_title">
+			<a href="{getUrl('','mid',$mid)}">{$module_info->browser_title}</a>
+		</div>
+	</div>

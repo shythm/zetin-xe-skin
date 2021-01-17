@@ -1,0 +1,29 @@
+<include target="_header.html" />
+<form action="./" method="post" onsubmit="return procFilter(this, window.insert)" class="board_write">
+	<input type="hidden" name="mid" value="{$mid}" />
+	<input type="hidden" name="content" value="{$oDocument->getContentText()}" />
+	<input type="hidden" name="document_srl" value="{$document_srl}" />
+	<input type="hidden" name="allow_comment" value="Y" />
+	<input type="hidden" name="allow_trackback" value="Y" />
+	<div class="write_header">
+		<input cond="$oDocument->getTitleText()" type="text" name="title" class="iText" title="{$lang->title}" value="{htmlspecialchars($oDocument->getTitleText())}" />
+		<input cond="!$oDocument->getTitleText()" type="text" name="title" class="iText" title="{$lang->title}" />
+		<input cond="$grant->manager" type="checkbox" name="is_notice" value="Y" class="iCheck" checked="checked"|cond="$oDocument->isNotice()" id="is_notice" />
+		<label cond="$grant->manager" for="is_notice">{$lang->notice}</label>
+	</div>
+    <div class="write_editor">
+		{$oDocument->getEditor()}
+	</div>
+	<div class="write_author" cond="!$is_logged">
+		<label for="userName">{$lang->writer}</label>
+		<input type="text" name="nick_name" id="userName" class="iText userName" value="{htmlspecialchars($oDocument->get('nick_name'))}" />
+		<label for="userPw">{$lang->password}</label>
+		<input type="password" name="password" id="userPw" class="iText userPw" />
+		<label for="homePage">{$lang->homepage}</label>
+		<input type="text" name="homepage" id="homePage" class="iText homePage" value="{htmlspecialchars($oDocument->get('homepage'))}" />
+    </div>
+	<div class="btnArea">
+		<input type="submit" value="{$lang->cmd_registration}" class="btn" />
+	</div>
+</form>
+<include target="_footer.html" />

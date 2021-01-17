@@ -1,0 +1,52 @@
+@charset "utf-8";
+
+/* common */
+.zetin-board { width: 100%; }
+.zetin-board a { color: inherit; text-decoration: none; }
+.zetin-board a:hover { text-decoration: underline; }
+.zetin-board svg { vertical-align: middle; margin-top: -2px; }
+
+/* board header */
+.zetin-board .board-header { display: none; }
+
+/* board list */
+.zetin-board table.board-list { width: 100%; font-size: 14px; font-family: inherit; border-spacing: 0px; text-align: center; }
+
+/* board list header */
+.zetin-board table.board-list th { padding: 12px; background-color: #222; color: #fff; white-space: nowrap; }
+.zetin-board table.board-list th:first-child { border-radius: 12px 0px 0px 0px; }
+.zetin-board table.board-list th:last-child { border-radius: 0px 12px 0px 0px; }
+
+/* board list items */
+.zetin-board table.board-list td { padding: 8px 8px; color: #222; }
+.zetin-board table.board-list tr:nth-child(even) { background-color: #f2f2f2; }
+.zetin-board table.board-list .col-title { text-align: left; margin-left: 16px; }
+.zetin-board table.board-list .col-author { text-align: left; }
+.zetin-board table.board-list .replyNum { color: #FB8C00; }
+.zetin-board table.board-list .pre-icon { display: none; }
+
+/* board info */
+.zetin-board .board-info { text-align: center; }
+
+/* list footer */
+.zetin-board .board-list-footer { text-align: center; width: 100%; margin-top: 24px; }
+.zetin-board .pagination > * { display: inline-block; margin: 0 4px; cursor: pointer; }
+.zetin-board .pagination .page-num a { font-size: 14px; font-weight: bold; padding: 4px; border-radius: 8px; transition: all 0.2s; }
+.zetin-board .pagination .page-num a:hover { background-color: #ddd; text-decoration: none; }
+.zetin-board .pagination .page-num a.page-curr { background-color: #222; color: #fff; padding: 4px 10px; }
+
+@media screen and (max-width: 720px) {
+    .zetin-board .board-header { display: block; color: #fff; text-align: center; font-size: 16px; font-weight: bold; background-color: #222; width: 100%; padding: 12px 0px; border-radius: 12px 12px 0px 0px; }
+    
+    /* board list mobile css */
+    .zetin-board table.board-list { display: block; }
+    .zetin-board table.board-list thead { display: none; }
+    .zetin-board table.board-list tbody { display: block; }
+    .zetin-board table.board-list tr { display: block; text-align: left; line-height: 1.5; padding: 8px 12px; }
+    .zetin-board table.board-list td { display: inline-block; padding: 0; font-size: 12px; color: #555; padding-right: 8px; }
+    
+    .zetin-board table.board-list .pre-icon { display: inline-block; }
+    .zetin-board table.board-list .col-title { display: block; margin: 0; font-size: 14px; color: #222; }
+    .zetin-board table.board-list .col-idx { display: none; }
+    .zetin-board table.board-list .col-notice { display: block !important; margin: 1px 0px 0px 0px; float: left; }
+}
