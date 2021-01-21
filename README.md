@@ -10,8 +10,11 @@
 ## 적용 모습
 
 - [PC 화면 이미지](./img/screen-pc.png)
+- <img src="/img/screen-pc.png" width="90%" height="90%"></img><br/>
 - [태블릿 화면 이미지](./img/screen-tablet.png)
+- <img src="/img/screen-tablet.png" width="90%" height="90%"></img><br/>
 - [모바일 화면 이미지](./img/screen-mobile.png)
+- <img src="/img/screen-mobile.png" width="90%" height="90%"></img><br/>
 
 ## 적용 방법
 
