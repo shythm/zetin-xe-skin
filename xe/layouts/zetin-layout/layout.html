@@ -55,10 +55,77 @@
     </nav>
 </header>
 
+{@ $cate_list = array(); $current_key = null; }
+<!--@foreach($category_list as $key=>$val)-->
+	<!--@if(!$val->depth)-->
+		{@
+			$cate_list[$key] = $val;
+			$cate_list[$key]->children = array();
+			$current_key = $key;
+		}
+	<!--@elseif($current_key)-->
+		{@ $cate_list[$current_key]->children[] = $val }
+	<!--@end-->
+<!--@end-->
+
+{@ $_global_curr = NULL }
+<block loop="$global_menu->list=>$key1,$val1">
+	<!--@if($val1['selected'])-->
+		{@ $_global_curr = $val1 }
+	<!--@end-->
+</block>
+
 <!-- contents for xe -->
 <section class="xe-contents">
-    <!-- xe contents added by backend -->
-    {$content}
+    <!-- left section of xe contents -->
+    <section class="xe-left">
+        <!-- local navigation bar -->
+        <div class="wrapper" cond="$_global_curr['list']">
+            <div class="section-header">{$_global_curr['link']}</div>
+            <ul>
+                <li loop="$_global_curr['list']=>$key,$val" class="{$val['selected'] ? 'active' : ''}">
+                    <a href="{$val['href']}"><span>{$val['link']}</span></a>
+                </li>
+            </ul>
+        </div>
+        <!-- category -->
+        <div class="wrapper" cond="$module_info->use_category=='Y'">
+            <div class="section-header">분류</div>
+            <ul class="category">
+                <li class="active"|cond="!$category">
+                    <a href="{getUrl('category','','page','')}">{$lang->total}</a>
+                </li>
+                <li loop="$cate_list=>$key,$val" class="active"|cond="$category==$val->category_srl">
+                    <a href="{getUrl(category,$val->category_srl,'document_srl','', 'page', '')}">{$val->title}<!--<em cond="$val->document_count">[{$val->document_count}]</em>--></a>
+                    <ul cond="count($val->children)">
+                        <li loop="$val->children=>$idx,$item" class="on_"|cond="$category==$item->category_srl">
+                            <a href="{getUrl(category,$item->category_srl,'document_srl','', 'page', '')}">{$item->title}<!--<em cond="$val->document_count">[{$item->document_count}]</em>--></a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!-- recent comment -->
+        <div class="wrapper">
+            <div class="recent-comment" style="display: none;">
+                <div class="section-header">최근 댓글</div>
+                <img class="zbxe_widget_output" widget="newest_comment" skin="zetin" list_count="8" module_srls="{$module_info->module_srl}" />
+            </div>
+        </div>
+        <script>
+            jQuery(function ($) {
+                $xeLeftRecentComment = $('.xe-contents .xe-left .recent-comment');
+                if ($xeLeftRecentComment.find('li').length) {
+                    $xeLeftRecentComment.show();
+                }
+            });
+        </script>
+    </section>
+    <!-- right section of xe contents -->
+    <section class="xe-right">
+        <!-- xe contents added by backend -->
+        {$content}
+    </section>
 </section>
 
 <!-- contents for home -->
