@@ -88,6 +88,7 @@
 			</td>
 			<td class="col-title">
 				<a href="{getUrl('document_srl',$document->document_srl, 'listStyle', $listStyle, 'cpage','')}">{$document->getTitle()}</a>
+				{$document->printExtraImages(60*60*$module_info->duration_new)|noescape}
 				<a cond="$document->getCommentCount()" href="{getUrl('document_srl', $document->document_srl)}#comment" class="replyNum" title="Replies">[{$document->getCommentCount()}]</a>
 				<a cond="$document->getTrackbackCount()" href="{getUrl('document_srl', $document->document_srl)}#trackback" class="trackbackNum" title="Trackbacks">[{$document->getTrackbackCount()}]</a>
 			</td>

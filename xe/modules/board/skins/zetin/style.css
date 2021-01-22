@@ -27,11 +27,49 @@
 
 /* board list items */
 .zetin-board table.board-list td { padding: 6px; color: #222; }
-.zetin-board table.board-list tr:nth-child(even) { background-color: #f2f2f2; }
+.zetin-board table.board-list tr:nth-child(even) { background-color: hsl(0, 0%, 95%); }
 .zetin-board table.board-list .col-title { text-align: left; margin-left: 16px; }
 .zetin-board table.board-list .col-author { text-align: left; }
 .zetin-board table.board-list .replyNum { color: #FB8C00; }
 .zetin-board table.board-list .pre-icon { display: none; }
+
+/* board read */
+.zetin-board .board-read .read-header h1 { font-size: 14px; padding: 8px 16px; background-color: #555; color: #fff; border-radius: 12px 12px 0px 0px; margin: 0; }
+.zetin-board .board-read .read-header .read-info { padding: 8px 16px; background-color: #f2f2f2; border-bottom: 1px solid #d7d7d7; }
+.zetin-board .board-read .read-header .read-info > * { margin-right: 6px; }
+
+.zetin-board .board-read .read-body { padding: 16px; }
+.zetin-board .board-read .read-body .xe_content { font-family: inherit; }
+.zetin-board .board-read .read-body h1{ font-size: 1.8em; }
+.zetin-board .board-read .read-body p { margin: 0; line-height: 1.75em; }
+.zetin-board .board-read .read-cmd { text-align: right; cursor: default; }
+.zetin-board .board-read .read-cmd > * { margin-left: 4px; }
+.zetin-board .board-read .read-cmd a.act-btn { text-decoration: none; padding: 6px 12px; }
+
+/* feedback */
+.zetin-board .feedback .xe_content { font-family: inherit; }
+.zetin-board .feedback p { line-height: 1.75em; }
+.zetin-board .feedback-meta { margin-top: 24px; margin-bottom: 12px; font-size: 14px; }
+.zetin-board .feedback-meta .comment-count { color: #FB8C00; }
+.zetin-board .feedback-list { padding: 0; margin: 0; list-style: none; }
+.zetin-board .feedback-list-item { margin-bottom: 12px; position: relative; }
+.zetin-board .feedback-list-item.depth-1 { margin-left: calc(24px * 1); }
+.zetin-board .feedback-list-item.depth-2 { margin-left: calc(24px * 2); }
+.zetin-board .feedback-list-item.depth-3 { margin-left: calc(24px * 3); }
+.zetin-board .feedback-list-item.depth-4 { margin-left: calc(24px * 4); }
+.zetin-board .feedback-list-item.depth-5 { margin-left: calc(24px * 5); }
+.zetin-board .feedback-list-item.depth-6 { margin-left: calc(24px * 6); }
+.zetin-board .feedback-list-item-meta { padding: 6px 12px; background-color: #f2f2f2; border-bottom: solid 1px #d7d7d7; }
+.zetin-board .feedback-list-item-action { float: right; }
+.zetin-board .feedback-list-item-action > * { margin-left: 8px; }
+.zetin-board .feedback-list-item-content { padding: 6px 12px; }
+.zetin-board .feedback-list-item .feedback-sub-mark { display: block; position: absolute; left: -16px; top: 0px; width: 12px; height: 12px; border: 2px solid #d7d7d7; border-top: none; border-right: none; }
+
+.zetin-board .write-comment .write-cmd { margin-bottom: 24px; text-align: right; }
+.zetin-board .write-comment .write-cmd > * { margin-left: 8px; }
+.zetin-board .write-comment .write-author { padding: 12px; margin-bottom: 18px; background-color: #f7f7f7; border: solid 1px #d7d8d8; border-radius: 3px; text-align: right; }
+.zetin-board .write-comment .write-author > * { display: inline-block; margin-left: 4px; }
+
 
 /* board info */
 .zetin-board .board-info { text-align: center; }

@@ -1,57 +1,47 @@
-<div class="board_read">
-	<!-- READ HEADER -->
-	<div class="read_header">
+<!-- board read -->
+<div class="board-read">
+	<!-- board read header -->
+	<div class="read-header">
 		<h1><a href="{$oDocument->getPermanentUrl()}">{$oDocument->getTitle()}</a></h1>
-		<a cond="$oDocument->getHomepageUrl()" href="{$oDocument->getHomepageUrl()}" class="author">{$oDocument->getNickName()}</a>
-		<strong cond="!$oDocument->getHomepageUrl()" class="author">{$oDocument->getNickName()}</strong>
-		<p class="sum">
-			<span class="read">{$lang->readed_count} <span class="num">{$oDocument->get('readed_count')}</span></span>
-			<span class="vote">{$lang->voted_count} <span class="num">{$oDocument->get('voted_count')}</span></span>
-			<span class="time">{$oDocument->getRegdate('Y.m.d H:i')}</span>
-		</p>
-	</div>
-	<!-- /READ HEADER -->
-	<!-- READ BODY -->
-	<div class="read_body">
-		{$oDocument->getContent(false)}
-	</div>
-	<!-- /READ BODY -->
-	<!-- READ FOOTER -->
-	<div class="read_footer">
-		<div cond="$oDocument->hasUploadedFiles()" class="fileList">
-			<button type="button" class="toggleFile" onclick="jQuery(this).next('ul.files').toggle();">{$lang->uploaded_file} ({$oDocument->get('uploaded_count')})</button>
-			<ul class="files">
-				<li loop="$oDocument->getUploadedFiles()=>$key,$file"><a href="{getUrl('')}{$file->download_url}">{$file->source_filename} <span class="fileSize">[File Size:{FileHandler::filesize($file->file_size)}/Download:{number_format($file->download_count)}]</span></a></li>
-			</ul>
-		</div>
-		<div class="btnArea">
-			<span class="goList"><a href="#board_list" class="btn">{$lang->cmd_list}</a></span>
-			<span class="goEdit">
-				<a cond="$oDocument->isEditable()" class="btn" href="{getUrl('act','dispBoardWrite','document_srl',$oDocument->document_srl,'comment_srl','')}">{$lang->cmd_modify}</a>
-				<a cond="$oDocument->isEditable()" class="btn" href="{getUrl('act','dispBoardDelete','document_srl',$oDocument->document_srl,'comment_srl','')}">{$lang->cmd_delete}</a>
+		<div class="read-info">
+			<span class="info-author"><strong>{$oDocument->getNickName()}</strong></span>
+			<span class="info-time">{$oDocument->getRegdate('Y.m.d H:i')}</span>
+			<span class="info-read">
+				<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 16 16">
+					<path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+					<path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+				  </svg>
+				<span>{$oDocument->get('readed_count')}</span>
 			</span>
 		</div>
 	</div>
-	<!-- /READ FOOTER -->
+	<!-- board read body -->
+	<div class="read-body">
+		{$oDocument->getContent(false)}
+	</div>
+	<!-- board read footer -->
+	<div class="read-footer">
+		<div cond="$oDocument->hasUploadedFiles()">
+			<span>
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+					<path d="M13 0H6a2 2 0 0 0-2 2 2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 13V4a2 2 0 0 0-2-2H5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1zM3 4a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z"/>
+				  </svg>
+			</span>
+			<a href="javascript:void(0)" onclick="jQuery(this).next('ul.files').toggle();">
+				<strong>{$lang->uploaded_file} ({$oDocument->get('uploaded_count')})</strong>
+			</a>
+			<ul class="files">
+				<li loop="$oDocument->getUploadedFiles()=>$key,$file">
+					<a href="{getUrl('')}{$file->download_url}">{$file->source_filename} <span class="fileSize">[파일 크기: {FileHandler::filesize($file->file_size)} &middot; 다운로드 횟수: {number_format($file->download_count)}]</span></a>
+				</li>
+			</ul>
+		</div>
+		<div class="read-cmd">
+			<a class="act-btn" href="{getUrl('document_srl','')}">{$lang->cmd_list}</a>
+			<a class="act-btn" href="{getUrl('act','dispBoardWrite','document_srl',$oDocument->document_srl,'comment_srl','')}" cond="$oDocument->isEditable()">{$lang->cmd_modify}</a>
+			<a class="act-btn" href="{getUrl('act','dispBoardDelete','document_srl',$oDocument->document_srl,'comment_srl','')}" cond="$oDocument->isEditable()">{$lang->cmd_delete}</a>
+		</div>
+	</div>
 </div>
 <include cond="$oDocument->allowTrackback()" target="_trackback.html" />
-<include cond="$oDocument->allowComment()" target="_comment.html" />
-<!-- WRITE COMMENT -->
-<form cond="$grant->write_comment && $oDocument->isEnableComment()" action="./" method="post" onsubmit="return procFilter(this, insert_comment)" class="write_comment">
-	<input type="hidden" name="mid" value="{$mid}" />
-	<input type="hidden" name="document_srl" value="{$oDocument->document_srl}" />
-	<input type="hidden" name="comment_srl" value="" />
-	<textarea name="content" rows="5" cols="50"></textarea>
-	<div class="write_author" cond="!$is_logged">
-		<label for="userName">{$lang->writer}</label>
-		<input type="text" name="nick_name" id="userName" class="iText userName" />
-		<label for="userPw">{$lang->password}</label>
-		<input type="password" name="password" id="userPw" class="iText userPw" />
-		<label for="homePage">{$lang->homepage}</label>
-		<input type="text" name="homepage" id="homePage" class="iText homePage" />
-    </div>
-	<div class="btnArea">
-		<input type="submit" value="{$lang->cmd_comment_registration}" class="btn" />
-	</div>
-</form>
-<!-- /WRITE COMMENT -->
+<include cond="$oDocument->allowComment()" target="_comment.html"/>

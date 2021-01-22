@@ -51,7 +51,7 @@ body {
 .xe-contents .xe-left a { color: inherit; text-decoration: none; }
 .xe-contents .xe-left a:hover { text-decoration: underline; }
 .xe-contents .xe-left ul { background: none; padding: 0; margin: 0; list-style: none; }
-.xe-contents .xe-left li { background: none; padding: 4px 12px !important; margin: 0 !important; }
+.xe-contents .xe-left li { background: none; padding: 5px 12px !important; margin: 0 !important; }
 .xe-contents .xe-left li.active { background-color: #f2f2f2; border-left: 6px solid #222; border-radius: 8px 24px 24px 8px; }
 .xe-contents .xe-left .section-header { background-color: #333; color: #fff; padding: 6px 16px; margin-bottom: 8px; border-radius: 8px 24px 24px 8px; font-weight: bold; box-sizing: border-box; }
 .xe-contents .xe-left .recent-comment .tag { display: none; }

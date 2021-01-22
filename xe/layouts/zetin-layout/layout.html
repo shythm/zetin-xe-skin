@@ -38,7 +38,7 @@
                 </a>
                 <a href="{getUrl('act', 'dispMemberLogout')}" rel="nofollow" title="로그아웃" class="nav-item login">로그아웃</a>
             <!--@else-->
-                <a href="{getUrl('act', 'dispMemberLoginForm')}" id="btn-login" title="로그인" class="nav-item login">로그인</a>
+                <a href="{getUrl('act', 'dispMemberLoginForm')}" id="btn-login" title="로그인" onClick="setTimeout(function () { jQuery('#uemail.textbox').focus() }, 100);" class="nav-item login">로그인</a>
             <!--@end-->
         </div>
         <ul class="nav-main js-hamburger-targ">
@@ -75,8 +75,10 @@
 	<!--@end-->
 </block>
 
+{@ $isHomePage = ($module_info->mid == 'home')}
+
 <!-- contents for xe -->
-<section class="xe-contents">
+<section class="xe-contents" cond="!$isHomePage">
     <!-- left section of xe contents -->
     <section class="xe-left">
         <!-- local navigation bar -->
@@ -129,7 +131,6 @@
 </section>
 
 <!-- contents for home -->
-{@ $isHomePage = ($module_info->mid == 'home')}
 <section class="zetin-home" cond="$isHomePage">
     <div class="main-img"></div>
     <h2>ZETIN.about</h2>
