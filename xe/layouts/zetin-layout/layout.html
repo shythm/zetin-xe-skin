@@ -38,7 +38,7 @@
                 </a>
                 <a href="{getUrl('act', 'dispMemberLogout')}" rel="nofollow" title="로그아웃" class="nav-item login">로그아웃</a>
             <!--@else-->
-                <a href="{getUrl('act', 'dispMemberLoginForm')}" id="btn-login" title="로그인" onClick="setTimeout(function () { jQuery('#uemail.textbox').focus() }, 100);" class="nav-item login">로그인</a>
+                <a href="{getUrl('act', 'dispMemberLoginForm')}" title="로그인" class="nav-item login btn-login">로그인</a>
             <!--@end-->
         </div>
         <ul class="nav-main js-hamburger-targ">
@@ -232,7 +232,7 @@
     <script>
         jQuery(function ($) {
             let $loginWidget = $(".login-widget");
-            $("#btn-login").click(function () {
+            $(".btn-login").click(function () {
                 $loginWidget.show().addClass('show').removeClass('hide');
                 return false;
             });

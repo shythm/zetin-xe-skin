@@ -1,18 +1,30 @@
 <include target="_header.html" />
-<div cond="$oDocument->isExists()" class="context_data">
-	<h3 class="title">{$oDocument->getTitle()}</h3>
-	<p class="author">
-		<strong>{$oDocument->getNickName()}</strong>
-	</p>
+<div class="board-read" cond="$oDocument->isExists()">
+	<!-- board read header -->
+	<div class="read-header">
+		<h1><a href="{$oDocument->getPermanentUrl()}">{$oDocument->getTitle()}</a></h1>
+		<div class="read-info">
+			<span class="info-author"><strong>{$oDocument->getNickName()}</strong></span>
+			<span class="info-time">{$oDocument->getRegdate('Y.m.d H:i')}</span>
+			<span class="info-read">
+				<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 16 16">
+					<path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+					<path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+				  </svg>
+				<span>{$oDocument->get('readed_count')}</span>
+			</span>
+		</div>
+	</div>
 </div>
-<form action="./" method="get" onsubmit="return procFilter(this, delete_document)" class="context_message">
+
+<form action="./" method="get" onsubmit="return procFilter(this, delete_document)" class="context-message">
 	<input type="hidden" name="mid" value="{$mid}" />
 	<input type="hidden" name="page" value="{$page}" />
 	<input type="hidden" name="document_srl" value="{$document_srl}" />
-	<h1>{$lang->confirm_delete}</h1>
-	<div class="btnArea">
-		<input type="submit" value="{$lang->cmd_delete}" class="btn" />
-		<button type="button" onclick="history.back()" class="btn">{$lang->cmd_cancel}</button>
+	<h1 class="warning">{$lang->confirm_delete}</h1>
+	<div class="context-cmd">
+		<input type="submit" value="{$lang->cmd_delete}" class="act-btn" style="padding: 5px 12px; font-family: inherit; font-size: inherit;" />
+		<button type="button" onclick="history.back()" class="act-btn" style="padding: 5px 12px; font-family: inherit; font-size: inherit;">{$lang->cmd_cancel}</button>
 	</div>
 </form>
 <include target="_footer.html" />

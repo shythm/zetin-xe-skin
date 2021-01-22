@@ -120,7 +120,7 @@ body {
 .error { color: #B71C1C; }
 /* Revealing Animation (출처: https://webclub.tistory.com/581 [Web Club]) */
 .login-widget.show { transform: scale(1); } 
-.login-widget.show .login-background { background: transparent; animation: fadeIn .5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; }
+.login-widget.show .login-background { background: rgba(0, 0, 0, 0.7); animation: fadeIn .5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; }
 .login-widget.show .login-box { opacity: 0; animation: scaleUp 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; }
 .login-widget.hide { animation: quickScaleDown 0s .5s linear forwards; }
 .login-widget.hide .login-background { animation: fadeOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; }

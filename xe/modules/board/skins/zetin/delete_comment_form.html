@@ -1,21 +1,25 @@
 <include target="_header.html" />
-<div cond="$oComment->isExists()" class="context_data">
-	<h3 class="author">
-		<a cond="$oComment->homepage" href="{$oComment->homepage}">{$oComment->getNickName()}</a>
-		<strong cond="!$oComment->homepage">{$oComment->getNickName()}</strong>
-	</h3>
-	<p class="time">{$oComment->getRegdate('Y.m.d H:i')}</p>
-	{$oComment->getContent(false)}
+<!-- feedback -->
+<div class="feedback">
+	<div cond="$oComment->isExists()" class="feedback-list-item">
+		<div class="feedback-list-item-meta">
+			<span style="margin-right: 8px;"><strong>{$oComment->getNickName()}</strong></span>
+			<span style="font-size: 0.9em;">{$oComment->getRegdate('Y.m.d H:i')}</span>
+		</div>
+		<div class="feedback-list-item-content">
+			{$oComment->getContent(false)}
+		</div>
+	</div>
 </div>
-<form action="./" method="get" onsubmit="return procFilter(this, delete_comment)" class="context_message">
+<form class="context-message" action="./" method="get" onsubmit="return procFilter(this, delete_comment)">
 	<input type="hidden" name="mid" value="{$mid}" />
 	<input type="hidden" name="page" value="{$page}" />
 	<input type="hidden" name="document_srl" value="{$oComment->get('document_srl')}" />
 	<input type="hidden" name="comment_srl" value="{$oComment->get('comment_srl')}" />
-	<h1>{$lang->confirm_delete}</h1>
-	<div class="btnArea">
-		<input type="submit" value="{$lang->cmd_delete}" class="btn" />
-		<button type="button" onclick="history.back()" class="btn">{$lang->cmd_cancel}</button>
+	<h1 class="warning">{$lang->confirm_delete}</h1>
+	<div class="context-cmd">
+		<input type="submit" class="act-btn" style="padding: 5px 12px; font-family: inherit; font-size: inherit;" value="{$lang->cmd_delete}" />
+		<button type="button" class="act-btn" style="padding: 5px 12px; font-family: inherit; font-size: inherit;" onclick="history.back()">{$lang->cmd_cancel}</button>
 	</div>
 </form>
 <include target="_footer.html" />
