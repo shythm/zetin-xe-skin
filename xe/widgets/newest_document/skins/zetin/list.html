@@ -1,17 +1,16 @@
 <!--%import("style.css")-->
 
 <div class="newest-document-zetin">
-    <!--@foreach($widget_info->document_list as $oDocument)-->
-    <div class="document-item">
-        <div class="document-title">
+    <ul>
+        <!--@foreach($widget_info->document_list as $oDocument)-->
+        <li>
             <span class="tag" style="margin-right: 4px;">{$oDocument->getModuleName()}</span>
             <a href="{$oDocument->getPermanentUrl()}#{$oDocument->getCommentCount()}">{$oDocument->getTitle($widget_info->subject_cut_size)}</a>
             {$oDocument->printExtraImages($widget_info->duration_new)}
             <!--@if($oDocument->getCommentCount())-->
             <span class="comment"><a href="{$oDocument->getPermanentUrl()}#comment">[{$oDocument->getCommentCount()}]</a></span>
             <!--@end-->
-        </div>
-        <!-- <div class="document-info">{$oDocument->getNickName()} | {$oDocument->getRegdate("y-m-d")}</div> -->
-    </div>
-    <!--@end-->
+        </li>
+        <!--@end-->
+    </ul>
 </div>
