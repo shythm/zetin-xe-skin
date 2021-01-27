@@ -1,6 +1,6 @@
 # ZETIN XE Skin
 
-- [ZETIN 홈페이지](zetin.uos.ac.kr)를 위한 스킨
+- [ZETIN 홈페이지](http://zetin.uos.ac.kr)를 위한 스킨
 - XE(XpressEngine 1) CMS를 위한 스킨
 - HTML, CSS, jQuery 활용
 - 반응형 웹 페이지
