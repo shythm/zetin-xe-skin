@@ -1,15 +1,24 @@
 <load target="style.css" />
 
-{@ $another_place = False }
+{@ $doc_exist = False }
 <!--@if ($oDocument)-->
 	<!--@if ($oDocument->isExists())-->
-		{@ $another_place = True }
+		{@ $doc_exist = True }
 	<!--@end-->
 <!--@else-->
-	{@ $another_place = True }
+	{@ $doc_exist = True }
 <!--@end-->
 
-<div class="zetin-board {$another_place ? 'another-place' : ''}">
+<script>
+	jQuery(function ($) {
+		var doc_exist = '{$doc_exist}'; // replaced by php backend
+		if (doc_exist) {
+			$('body').addClass('board-doc-exist');
+		}
+	});
+</script>
+
+<div class="zetin-board">
 	<!-- board header -->
 	<div class="board-header">
 		<!-- show browser title -->

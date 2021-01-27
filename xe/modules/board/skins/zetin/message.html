@@ -2,8 +2,8 @@
 <div class="context-message">
     <h1 class="notice">{$message}</h1>
     <div class="context-cmd">
-        <a cond="!$is_logged" class="act-btn btn-login" style="padding: 5px 12px; text-decoration: none; font-size: inherit;" href="{getUrl('act','dispMemberLoginForm')}">{$lang->cmd_login}</a>
-        <button type="button" class="act-btn" style="height: 29px; padding: 5px 12px; font-size: inherit;" onclick="history.back()">{$lang->cmd_back}</button>
+        <a cond="!$is_logged" class="act-btn btn-login" href="{getUrl('act','dispMemberLoginForm')}">{$lang->cmd_login}</a>
+        <button type="button" class="act-btn" onclick="history.back()">{$lang->cmd_back}</button>
     </div>
 </div>
 <include target="_footer.html" />

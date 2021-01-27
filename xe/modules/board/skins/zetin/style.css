@@ -1,57 +1,66 @@
 @charset "utf-8";
 
 /* common */
-.zetin-board { width: 100%; }
-.zetin-board a { color: inherit; text-decoration: none; }
+.zetin-board { position: relative; width: 100%; }
+.zetin-board a { color: unset; text-decoration: none; }
 .zetin-board a:hover { text-decoration: underline; }
 .zetin-board svg { vertical-align: middle; margin-top: -2px; }
-.zetin-board .act-btn { background-color: #222; color: white; border: none; border-radius: 4px; cursor: pointer; transition: background-color 0.2s; }
-.zetin-board .act-btn:hover { background-color: #333; }
+
+/* act-btn */
+.zetin-board .act-btn {
+    display: inline-block; margin: 0; padding: 0 12px !important;
+    font-family: inherit; font-size: 1em; vertical-align: baseline;
+    text-decoration: none !important; text-align: center;
+    height: 2em !important; line-height: 2em; overflow: visible;
+    border: none; border-radius: 4px;  
+    background-color: #555; color: #fff; cursor: pointer;
+    transition: background-color 0.2s;
+}
+.zetin-board .act-btn:active,
+.zetin-board .act-btn:hover,
+.zetin-board .act-btn[disabled] {
+    background-color: #222;
+}
 
 /* board header */
-.zetin-board .board-header { position: relative; margin-bottom: 12px; }
-.zetin-board .board-header .board-title { font-size: 28px; font-weight: 600; border-left: 6px solid #222; border-radius: 5px; padding: 0 8px; margin-bottom: 12px; }
-.zetin-board .board-header .board-comment { font-size: 15px; }
+.zetin-board .board-header { margin-bottom: 12px; }
+.zetin-board .board-header .board-title { font-size: 2em; font-weight: 600; border-left: 6px solid #222; border-radius: 5px; padding: 0 8px; margin-bottom: 12px; }
+.zetin-board .board-header .board-comment { font-size: 1.1em; }
 
 /* board search */
-.zetin-board .board-search { position: relative; top: -38px; margin-bottom: -28px; text-align: right; }
-.zetin-board .board-search > * { height: 28px; box-sizing: border-box; margin-left: 2px; font-family: inherit; vertical-align: middle; }
-.zetin-board .board-search-btn { padding: 0 12px; }
+.zetin-board .board-search { position: relative; text-align: right; margin-top: -36px;margin-bottom: 10px; pointer-events: none; }
+.zetin-board .board-search > * { height: 2em; box-sizing: border-box; margin-left: 2px; vertical-align: middle; pointer-events: auto; }
 .zetin-board .board-search-icon { display: none; }
 
-/* board list */
-.zetin-board table.board-list { width: 100%; font-size: inherit; font-family: inherit; border-spacing: 0px; text-align: center; }
+/* board contents list */
+.zetin-board table.board-list { font-size: 1em; width: 100%; border-spacing: 0px; text-align: center; }
 
-/* board list header */
-.zetin-board table.board-list th { padding: 8px; background-color: #333; color: #fff; white-space: nowrap; }
+.zetin-board table.board-list th { padding: 10px; background-color: #333; color: #fff; white-space: nowrap; }
 .zetin-board table.board-list th:first-child { border-radius: 8px 0px 0px 0px; }
 .zetin-board table.board-list th:last-child { border-radius: 0px 8px 0px 0px; }
+.zetin-board table.board-list td { line-height: 1.6; padding: 5px 10px; color: #000; }
+.zetin-board table.board-list tr:nth-child(even) { background-color: #f2f2f2; }
 
-/* board list items */
-.zetin-board table.board-list td { padding: 6px; color: #222; }
-.zetin-board table.board-list tr:nth-child(even) { background-color: hsl(0, 0%, 95%); }
 .zetin-board table.board-list .col-title { text-align: left; margin-left: 16px; }
+.zetin-board table.board-list .col-title .thumbnail { padding: 4px; margin-right: 8px; border: solid 1px #dedede; vertical-align: middle; }
 .zetin-board table.board-list .col-author { text-align: left; }
 .zetin-board table.board-list .replyNum { color: #FB8C00; }
 .zetin-board table.board-list .pre-icon { display: none; }
 
-/* board read */
-.zetin-board .xe_content { font-family: inherit; }
+/* board content read */
+.zetin-board .xe_content { font-family: unset; line-height: 1.6; font-size: 1em; color: #000; }
 
-.zetin-board .board-read .read-header h1 { font-size: 14px; padding: 8px 16px; background-color: #555; color: #fff; border-radius: 12px 12px 0px 0px; margin: 0; }
+.zetin-board .board-read .read-header h1 { font-size: 1em; line-height: 1.4; padding: 8px 16px; background-color: #555; color: #fff; border-radius: 12px 12px 0px 0px; margin: 0; }
 .zetin-board .board-read .read-header .read-info { padding: 8px 16px; background-color: #f2f2f2; border-bottom: 1px solid #d7d7d7; }
 .zetin-board .board-read .read-header .read-info > * { margin-right: 6px; }
 .zetin-board .board-read .read-header .module-name { display: none; }
 
-.zetin-board .board-read .read-body { padding: 16px; }
-.zetin-board .board-read .read-body h1{ font-size: 1.8em; }
-.zetin-board .board-read .read-body p { margin: 0; line-height: 1.75em; }
+.zetin-board .board-read .read-body { padding: 12px; }
+.zetin-board .board-read .read-body h1{ font-size: 2em; }
 .zetin-board .board-read .read-cmd { text-align: right; cursor: default; }
-.zetin-board .board-read .read-cmd a.act-btn { text-decoration: none; padding: 6px 12px; }
 
 /* feedback */
-.zetin-board .feedback p { line-height: 1.75em; }
-.zetin-board .feedback-meta { margin-top: 24px; margin-bottom: 12px; font-size: 14px; }
+.zetin-board .feedback-meta { margin-top: 24px; margin-bottom: 12px; }
 .zetin-board .feedback-meta .comment-count { color: #FB8C00; }
 .zetin-board .feedback-list { padding: 0; margin: 0; list-style: none; }
 .zetin-board .feedback-list-item { margin-bottom: 12px; position: relative; }
@@ -61,10 +70,10 @@
 .zetin-board .feedback-list-item.depth-4 { margin-left: calc(24px * 4); }
 .zetin-board .feedback-list-item.depth-5 { margin-left: calc(24px * 5); }
 .zetin-board .feedback-list-item.depth-6 { margin-left: calc(24px * 6); }
-.zetin-board .feedback-list-item-meta { padding: 6px 12px; background-color: #f2f2f2; border-bottom: solid 1px #d7d7d7; }
+.zetin-board .feedback-list-item-meta { padding: 8px 12px; background-color: #f2f2f2; border-bottom: solid 1px #d7d7d7; }
 .zetin-board .feedback-list-item-action { float: right; }
 .zetin-board .feedback-list-item-action > * { margin-left: 8px; }
-.zetin-board .feedback-list-item-content { padding: 6px 12px; }
+.zetin-board .feedback-list-item-content { padding: 8px 12px; }
 .zetin-board .feedback-list-item .feedback-sub-mark { display: block; position: absolute; left: -16px; top: 0px; width: 12px; height: 12px; border: 2px solid #d7d7d7; border-top: none; border-right: none; }
 
 .zetin-board .write-comment .write-cmd { margin-bottom: 24px; text-align: right; }
@@ -73,14 +82,15 @@
 .zetin-board .write-comment .write-author > * { display: inline-block; margin-left: 4px; }
 
 /* form */
-.zetin-board .context-message h1 { text-align: center; }
+.zetin-board .context-message h1 { text-align: center; font-size: 1.1em; }
 .zetin-board .context-message .notice { background-color: #424242; color: #fff; border-radius: 12px; padding: 12px 0; margin: 12px 72px; }
 .zetin-board .context-message .warning { background-color: #D32F2F; color: #fff; border-radius: 12px; padding: 12px 0; margin: 12px 72px; }
 .zetin-board .context-cmd { text-align: center; }
 
 /* board write */
-.zetin-board .board-write .write-header { font-size: 14px; padding: 8px 16px; background-color: #555; color: #fff; border-radius: 12px 12px 0px 0px; margin: 0; }
-.zetin-board .board-write .write-header .iText { width: 75%; font-family: inherit; font-size: inherit; }
+.zetin-board .board-write .write-header { padding: 8px 16px; background-color: #555; color: #fff; border-radius: 12px 12px 0px 0px; margin: 12px 0 0 0; }
+.zetin-board .board-write .write-header .iText { width: 60%; }
+.zetin-board .board-write .write-header .iCategory { width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 .zetin-board .board-write .write-author { padding: 12px; margin-bottom: 18px; background-color: #f7f7f7; border: solid 1px #d7d8d8; border-radius: 3px; text-align: right; }
 .zetin-board .board-write .write-author > * { display: inline-block; margin-left: 4px; }
 .zetin-board .board-write .write-cmd { margin-bottom: 24px; text-align: right; }
@@ -93,35 +103,33 @@
 .zetin-board .board-write-btn { text-align: right; margin-bottom: 12px; }
 .zetin-board .pagination { text-align: center; }
 .zetin-board .pagination > * { display: inline-block; margin: 0 4px; cursor: pointer; }
-.zetin-board .pagination .page-num a { font-size: 14px; padding: 0px 4px; }
+.zetin-board .pagination .page-num a { padding: 0px 4px; }
 .zetin-board .pagination .page-num a:hover { text-decoration: underline; }
-.zetin-board .pagination .page-num a.page-curr { font-weight: bold; border-bottom: 4px solid #222; }
+.zetin-board .pagination .page-num a.page-curr { font-weight: bold; border-bottom: 2px solid #222; }
 
 /* board footer */
 .zetin-board .board-footer { clear: both; margin-top: 24px; }
 
 @media screen and (max-width: 720px) {
     .zetin-board .board-header { margin: 0; padding: 0; }
-    .zetin-board .board-header .board-title { display: block; color: #fff; text-align: center; border: none; font-size: 16px; font-weight: bold; background-color: #333; width: 100%; margin: 0; padding: 12px 0px; border-radius: 12px 12px 0px 0px; }
+    .zetin-board .board-header .board-title { display: block; font-size: 1.1em; color: #fff; text-align: center; border: none; font-weight: bold; background-color: #333; width: 100%; margin: 0; padding: 12px 0px; border-radius: 12px 12px 0px 0px; }
     .zetin-board .board-header .board-comment { display: none; }
     
     .zetin-board .board-search { display: none; position: static; text-align: right; padding: 8px 0px; background-color: #f2f2f2; margin: 0; }
-    .zetin-board .board-search-icon { display: block; position: absolute; top: 104px; right: 28px; fill: #fff; }
+    .zetin-board .board-search-icon { display: block; position: absolute; top: 12px; right: 16px; fill: #fff; }
 
     /* board list mobile css */
     .zetin-board table.board-list { display: block; }
     .zetin-board table.board-list thead { display: none; }
     .zetin-board table.board-list tbody { display: block; }
-    .zetin-board table.board-list tr { display: block; text-align: left; line-height: 1.5; padding: 8px 12px; }
-    .zetin-board table.board-list td { display: inline-block; padding: 0; font-size: 12px; color: #555; padding-right: 8px; }
+    .zetin-board table.board-list tr { display: block; text-align: left; padding: 5px 10px; }
+    .zetin-board table.board-list td { display: inline-block; padding: 0; color: #555; padding-right: 8px; }
     
     .zetin-board table.board-list .pre-icon { display: inline-block; }
-    .zetin-board table.board-list .col-title { display: block; margin: 0; font-size: 14px; color: #222; }
+    .zetin-board table.board-list .col-title { display: block; margin: 0; color: #222; }
     .zetin-board table.board-list .col-idx { display: none; }
-    .zetin-board table.board-list .col-notice { display: block !important; margin: 1px 0px 0px 0px; float: left; }
+    .zetin-board table.board-list .col-notice { display: block !important; float: left; }
 
-    /* board read css */
-    .zetin-board.another-place .board-header { display: none; }
-    .zetin-board .board-read .read-header .module-name { display: inline-block; background-color: #333; border-radius: 4px; margin-right: 12px; padding: 2px 6px; }
+    .zetin-board .board-read .read-header .module-name { display: inline-block; background-color: #333; border-radius: 4px; margin-right: 4px; padding: 2px 6px; }
     .zetin-board .board-read .read-body { padding: 8px 4px; }
 }

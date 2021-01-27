@@ -29,7 +29,7 @@
 	<select name="search_target">
 		<option loop="$search_option=>$key,$val" value="{$key}" selected="selected"|cond="$search_target==$key">{$val}</option>
 	</select>
-	<input type="submit" onclick="xGetElementById('board_search').submit();return false;" value="{$lang->cmd_search}" class="board-search-btn act-btn" style="padding: 0 12px;" />
+	<input type="submit" onclick="xGetElementById('board_search').submit();return false;" value="{$lang->cmd_search}" class="board-search-btn act-btn" />
 </form>
 
 <!-- board list -->
@@ -118,10 +118,21 @@
 				<block cond="$document_srl!=$document->document_srl">{$no}</block>
 			</td>
 			<td class="col-title">
-				<a href="{getUrl('document_srl',$document->document_srl, 'listStyle', $listStyle, 'cpage','')}">{$document->getTitle()}</a>
-				{$document->printExtraImages(60*60*$module_info->duration_new)|noescape}
-				<a cond="$document->getCommentCount()" href="{getUrl('document_srl', $document->document_srl)}#comment" class="replyNum" title="Replies">[{$document->getCommentCount()}]</a>
-				<a cond="$document->getTrackbackCount()" href="{getUrl('document_srl', $document->document_srl)}#trackback" class="trackbackNum" title="Trackbacks">[{$document->getTrackbackCount()}]</a>
+				<!--@if($module_info->enable_gallery_view && $document->thumbnailExists())-->
+				<a href="{getUrl('document_srl',$document->document_srl, 'listStyle', $listStyle, 'cpage','')}">
+					<img class="thumbnail" src="{$document->getThumbnail(100)}" alt="" />
+				</a>
+				<!--@end-->
+				<a href="{getUrl('document_srl',$document->document_srl, 'listStyle', $listStyle, 'cpage','')}">
+					{$document->getTitle()}
+					{$document->printExtraImages(60*60*$module_info->duration_new)|noescape}
+				</a>
+				<a cond="$document->getCommentCount()" href="{getUrl('document_srl', $document->document_srl)}#comment" class="replyNum" title="Replies">
+					[{$document->getCommentCount()}]
+				</a>
+				<a cond="$document->getTrackbackCount()" href="{getUrl('document_srl', $document->document_srl)}#trackback" class="trackbackNum" title="Trackbacks">
+					[{$document->getTrackbackCount()}]
+				</a>
 			</td>
 			<!-- selected columns -->
 			<block loop="$list_config=>$key,$val">
@@ -163,7 +174,7 @@
 <!-- list footer -->
 <div class="board-list-footer">
 	<div class="board-write-btn">
-		<a href="{getUrl('act','dispBoardWrite','document_srl','')}" class="act-btn" style="padding: 5px 12px; text-decoration: none;">{$lang->cmd_write}</a>
+		<a href="{getUrl('act','dispBoardWrite','document_srl','')}" class="act-btn">{$lang->cmd_write}</a>
 	</div>
 	<!-- pagination -->
 	<div class="pagination" cond="$document_list || $notice_list">

@@ -1,5 +1,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 
+<load target="normalize.css" />
 <load target="layout.css" />
 <load target="layout.js" />
 
@@ -14,7 +15,6 @@
     <!-- global nagivation bar -->
     <nav class="zetin-gnb">
         <div class="nav-ctl">
-            <!-- <a href="" class="nav-itme search">검색</a> -->
             <a href="javascript:void(0);" class="nav-item hamburger" onclick="trigHamburger(this)"><div></div></a>
             <script>
                 function trigHamburger(e) {
@@ -44,10 +44,10 @@
         <ul class="nav-main js-hamburger-targ">
             <!-- if gnb isn't listed, check global_menu at the setting of this layout. -->
             <li loop="$global_menu->list=>$key1,$val1" class="nav-item">
-                <a href="{$val1['href']}" class="{$val1['selected'] ? 'active' : ''}"><span>{$val1['link']}</span></a>
+                <a href="{$val1['href']}" class="{$val1['selected'] ? 'active' : ''}">{$val1['link']}</a>
                 <ul cond="$val1['list']" class="nav-sub">
                     <li loop="$val1['list']=>$key2,$val2" class="nav-item">
-                        <a href="{$val2['href']}" class="{$val2['selected'] ? 'active' : ''}"><span>{$val2['link']}</span></a>
+                        <a href="{$val2['href']}" class="{$val2['selected'] ? 'active' : ''}">{$val2['link']}</a>
                     </li>
                 </ul>
             </li>
@@ -75,10 +75,9 @@
 	<!--@end-->
 </block>
 
-{@ $isHomePage = ($module_info->mid == 'home')}
-
 <!-- contents for xe -->
-<section class="xe-contents" cond="!$isHomePage">
+{@ $is_home_page = ($module_info->mid == 'home')}
+<section class="xe-contents" cond="!$is_home_page">
     <!-- left section of xe contents -->
     <section class="xe-left">
         <!-- local navigation bar -->
@@ -86,14 +85,14 @@
             <div class="section-header">{$_global_curr['link']}</div>
             <ul>
                 <li loop="$_global_curr['list']=>$key,$val" class="{$val['selected'] ? 'active' : ''}">
-                    <a href="{$val['href']}"><span>{$val['link']}</span></a>
+                    <a href="{$val['href']}">{$val['link']}</a>
                 </li>
             </ul>
         </div>
         <!-- category -->
-        <div class="wrapper" cond="$module_info->use_category=='Y'">
+        <div class="wrapper category" cond="$module_info->use_category=='Y'">
             <div class="section-header">분류</div>
-            <ul class="category">
+            <ul>
                 <li class="active"|cond="!$category">
                     <a href="{getUrl('category','','page','')}">{$lang->total}</a>
                 </li>
@@ -131,9 +130,10 @@
 </section>
 
 <!-- contents for home -->
-<section class="zetin-home" cond="$isHomePage">
+<section class="zetin-home-xe-content" cond="$is_home_page">{$content}</section>
+<section class="zetin-home" cond="$is_home_page">
     <div class="main-img"></div>
-    <h2>ZETIN.about</h2>
+    <h1>ZETIN.about</h1>
     <article class="about">
         <div class="about-item">
             <div class="polaroid">
@@ -148,23 +148,23 @@
             <p style="width: 100%; text-align: right;"><a href="http://zetin.uos.ac.kr/index.php?mid=history">연혁 바로가기</a></p>
         </div>
     </article>
-    <h2>ZETIN.notice</h2>
+    <h1>ZETIN.notice</h1>
     <article class="notice">
         <img class="zbxe_widget_output" widget="newest_document" skin="zetin" order_target="list_order" order_type="desc" list_count="4" duration_new="24" module_srls="16263" />
     </article>
-    <h2>ZETIN.board</h2>
+    <h1>ZETIN.board</h1>
     <article class="widget">
         <div class="widget-item">
             <!-- widget: newest_document, skin: zetin -->
-            <h3>최근 게시글</h3>
+            <h2 style="margin-left: 12px;">최근 게시글</h2>
             <img class="zbxe_widget_output" widget="newest_document" skin="zetin" order_target="list_order" order_type="desc" list_count="8" duration_new="24" module_srls="16259,1741,31413,1742,16261" />
         </div>
         <div class="widget-item">
-            <h3>최근 댓글</h3>
+            <h2 style="margin-left: 12px;">최근 댓글</h2>
             <img class="zbxe_widget_output" widget="newest_comment" skin="zetin" list_count="8" module_srls="16263,16259,1741,31413,1742,16261" />
         </div>
     </article>
-    <h2>ZETIN.photo</h2>
+    <h1>ZETIN.photo</h1>
     <article class="gallery">
         <img class="zbxe_widget_output" widget="content" skin="default" colorset="layout" content_type="document" module_srls="16261" list_type="gallery" tab_type="none" markup_type="list" list_count="4" cols_list_count="2" page_count="1" option_view="thumbnail" show_browser_title="N" show_comment_count="N" show_trackback_count="N" show_category="N" show_icon="N" order_target="regdate" order_type="desc" thumbnail_type="crop" thumbnail_width="400" thumbnail_height="300" />
     </article>
@@ -174,16 +174,16 @@
 <footer class="zetin-footer">
     서울시립대학교 중앙동아리 ZETIN <br />
     130-743 서울특별시 동대문구 서울시립대로 163 학생회관 3층 327호 <br />
-    Copyright 2021. ZETIN. All rights reserved.
+    Copyright 2021. ZETIN. All rights reserved. Powered by XE.
 </footer>
 
 <!-- login section -->
 <section class="login-widget" style="display: none;"|cond="$XE_VALIDATOR_ID != 'layouts/zetin-layout/layout/1' || !$XE_VALIDATOR_MESSAGE">
     <div class="login-background"></div>
     <div class="login-box">
-        <div class="login-header">
+        <h1 class="login-header">
             <span>{$lang->cmd_login}</span>
-        </div>
+        </h1>
         <div class="login-body">
             <form action="{getUrl('', 'act', 'procMemberLogin')}" method="post" autocomplete="off">
                 <input type="hidden" name="act" value="procMemberLogin" />

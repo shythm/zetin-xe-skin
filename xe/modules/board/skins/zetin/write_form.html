@@ -6,6 +6,12 @@
 	<input type="hidden" name="allow_comment" value="Y" />
 	<input type="hidden" name="allow_trackback" value="Y" />
 	<div class="write-header">
+		<select name="category_srl" cond="$module_info->use_category=='Y'" class="iCategory">
+			<option value="">{$lang->category}</option>
+			<option loop="$category_list => $val" disabled="disabled"|cond="!$val->grant" value="{$val->category_srl}" selected="selected"|cond="$val->grant&&$val->selected||$val->category_srl==$oDocument->get('category_srl')">
+				{str_repeat("&nbsp;&nbsp;",$val->depth)} {$val->title} ({$val->document_count})
+			</option>
+		</select>
 		<input cond="$oDocument->getTitleText()" type="text" name="title" class="iText" title="{$lang->title}" value="{htmlspecialchars($oDocument->getTitleText())}" />
 		<input cond="!$oDocument->getTitleText()" type="text" name="title" class="iText" title="{$lang->title}" />
 		<input cond="$grant->manager" type="checkbox" name="is_notice" value="Y" class="iCheck" checked="checked"|cond="$oDocument->isNotice()" id="is_notice" />
@@ -29,7 +35,7 @@
 		</div>
     </div>
 	<div class="write-cmd">
-		<input type="submit" value="{$lang->cmd_registration}" class="act-btn" style="padding: 5px 12px; font-size: inherit; font-family: inherit;" />
+		<input type="submit" value="{$lang->cmd_registration}" class="act-btn" />
 	</div>
 </form>
 <include target="_footer.html" />

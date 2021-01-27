@@ -13,6 +13,10 @@
             <title xml:lang="ko">게시판 설명</title>
 			<description xml:lang="ko">작성하면 화면에 표시 됨</description>
         </var>
+        <var name="enable_gallery_view" type="checkbox">
+            <title xml:lang="ko">갤러리 뷰 활성화</title>
+            <description xml:lang="ko">갤러리 뷰를 활성화합니다.</description>
+        </var>
     </extra_vars>
 </skin>
 

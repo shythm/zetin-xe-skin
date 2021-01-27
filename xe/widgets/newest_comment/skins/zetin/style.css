@@ -4,4 +4,4 @@
 .latest-comment-zetin ul { margin: 0; padding: 0; }
 .latest-comment-zetin li { display: block; width: 100%; padding: 6px; margin: 0; list-style: none; box-sizing: border-box;  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .latest-comment-zetin li:nth-child(even) { background-color: #f2f2f2; }
-.latest-comment-zetin .tag { background-color: #777; color: #fff; border-radius: 4px; padding: 1px 4px; cursor: default; }
+.latest-comment-zetin .tag { background-color: #777; color: #fff; border-radius: 4px; padding: 0px 4px; cursor: default; }
